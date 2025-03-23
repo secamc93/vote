@@ -1,0 +1,176 @@
+basePath: /api
+definitions:
+  request.HouseRequest:
+    properties:
+      name:
+        type: string
+      vote_group_id:
+        type: integer
+    type: object
+  request.UserRequest:
+    properties:
+      dni:
+        type: string
+      house_id:
+        type: integer
+      name:
+        type: string
+      vote_group_id:
+        type: integer
+    type: object
+  request.VoteGroupRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  response.BaseResponse:
+    properties:
+      message:
+        type: string
+      statusCode:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Documentación de la API de AUTH.
+  version: "1.0"
+paths:
+  /create-house:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new house with the provided house data and returns the
+        generated house ID.
+      parameters:
+      - description: House data
+        in: body
+        name: house
+        required: true
+        schema:
+          $ref: '#/definitions/request.HouseRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: House created successfully, returns house_id
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad request or house already exists
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+      summary: Create a new house
+      tags:
+      - House
+  /create-user:
+    post:
+      consumes:
+      - application/json
+      description: Parses a JSON payload to create a new user and returns the created
+        user's ID.
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'status: ok'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad request due to invalid JSON payload
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+        "500":
+          description: Internal server error during user creation
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+      summary: Create a new user
+      tags:
+      - Users
+  /get-users/{groupID}:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of users belonging to the specified group using the
+        provided groupID.
+      parameters:
+      - description: Group ID
+        in: path
+        name: groupID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of users
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request - invalid groupID
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve users for a group
+      tags:
+      - Users
+      - Groups
+  /vote-group:
+    post:
+      consumes:
+      - application/json
+      description: Crea un grupo de votación utilizando los datos proporcionados en
+        el cuerpo de la petición.
+      parameters:
+      - description: Detalles del grupo de votación
+        in: body
+        name: group
+        required: true
+        schema:
+          $ref: '#/definitions/request.VoteGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'status: ok'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: error description
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: error description
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Crea un nuevo grupo de votación
+      tags:
+      - VoteGroup
+swagger: "2.0"
