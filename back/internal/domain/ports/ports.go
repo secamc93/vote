@@ -11,4 +11,6 @@ type IVote interface {
 	CreateHouse(house dtos.HouseDTO) (uint, error)
 	GetHouseByName(name string) (bool, error)
 	GetUsers(groupID uint) ([]dtos.UserDTO, error)
+	GetHouses(houseDTO dtos.HouseDTO) ([]dtos.HouseDTO, error)
+	GetGroups() ([]dtos.VoteGroupDTO, error)
 }

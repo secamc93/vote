@@ -12,6 +12,8 @@ type IHandlerVote interface {
 	CreateUser(ctx *gin.Context)
 	CreateHouse(c *gin.Context)
 	GetUsers(ctx *gin.Context)
+	GetHouses(ctx *gin.Context)
+	GetGroups(ctx *gin.Context)
 }
 
 type HandlerVote struct {

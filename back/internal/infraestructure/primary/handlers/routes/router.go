@@ -40,6 +40,8 @@ func SetupRouter() *gin.Engine {
 		api.POST("/create-user", hanlder.CreateUser)
 		api.POST("/create-house", hanlder.CreateHouse)
 		api.GET("/get-users/:groupID", hanlder.GetUsers)
+		api.GET("/get-houses", hanlder.GetHouses)
+		api.GET("/get-groups", hanlder.GetGroups)
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

@@ -11,6 +11,8 @@ type IUsecaseVote interface {
 	CreateUser(user dtos.UserDTO) (uint, error)
 	CreateHouse(house dtos.HouseDTO) (uint, error)
 	GetUsers(groupID uint) ([]dtos.UserDTO, error)
+	GetHouses(houseDTO dtos.HouseDTO) ([]dtos.HouseDTO, error)
+	GetGroups() ([]dtos.VoteGroupDTO, error)
 }
 
 type UsecaseVote struct {

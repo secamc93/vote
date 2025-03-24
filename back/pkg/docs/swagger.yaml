@@ -27,8 +27,32 @@ definitions:
     properties:
       message:
         type: string
-      statusCode:
+      status_code:
         type: integer
+    type: object
+  response.HouseResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      vote_group_id:
+        type: integer
+    type: object
+  response.VoteGroupResponse:
+    properties:
+      created_at:
+        type: string
+      houses:
+        items:
+          $ref: '#/definitions/response.HouseResponse'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
     type: object
 info:
   contact: {}
@@ -100,6 +124,59 @@ paths:
       summary: Create a new user
       tags:
       - Users
+  /get-groups:
+    get:
+      consumes:
+      - application/json
+      description: Get all groups for voting
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of groups
+          schema:
+            items:
+              $ref: '#/definitions/response.VoteGroupResponse'
+            type: array
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve a list of groups
+      tags:
+      - VoteGroup
+  /get-houses:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves houses using the provided filter criteria in the query
+        parameters.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of houses
+          schema:
+            items:
+              $ref: '#/definitions/response.HouseResponse'
+            type: array
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve list of houses
+      tags:
+      - House
   /get-users/{groupID}:
     get:
       consumes:
@@ -135,7 +212,6 @@ paths:
       summary: Retrieve users for a group
       tags:
       - Users
-      - Groups
   /vote-group:
     post:
       consumes:

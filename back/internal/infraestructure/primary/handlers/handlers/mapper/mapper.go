@@ -42,3 +42,32 @@ func MapUserDTOsToResponses(users []dtos.UserDTO) []response.UserResponse {
 	}
 	return responses
 }
+
+func MapHouseDTOsToResponses(houses []dtos.HouseDTO) []response.HouseResponse {
+	responses := make([]response.HouseResponse, len(houses))
+	for i, house := range houses {
+		responses[i] = response.HouseResponse{
+			ID:          house.ID,
+			Name:        house.Name,
+			VoteGroupID: house.VoteGroupID,
+			CreatedAt:   house.CreatedAt,
+		}
+	}
+	return responses
+}
+
+func MapVoteGroupDTOToResponse(voteGroup dtos.VoteGroupDTO) response.VoteGroupResponse {
+	return response.VoteGroupResponse{
+		ID:        voteGroup.ID,
+		Name:      voteGroup.Name,
+		CreatedAt: voteGroup.CreatedAt,
+		// Houses:    MapHouseDTOsToResponses(voteGroup.Houses),
+	}
+}
+func MapVoteGroupDTOToResponses(voteGroups []dtos.VoteGroupDTO) []response.VoteGroupResponse {
+	responses := make([]response.VoteGroupResponse, len(voteGroups))
+	for i, voteGroup := range voteGroups {
+		responses[i] = MapVoteGroupDTOToResponse(voteGroup)
+	}
+	return responses
+}

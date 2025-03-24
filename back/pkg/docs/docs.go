@@ -111,6 +111,85 @@ const docTemplate = `{
                 }
             }
         },
+        "/get-groups": {
+            "get": {
+                "description": "Get all groups for voting",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "VoteGroup"
+                ],
+                "summary": "Retrieve a list of groups",
+                "responses": {
+                    "200": {
+                        "description": "List of groups",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/response.VoteGroupResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get-houses": {
+            "get": {
+                "description": "Retrieves houses using the provided filter criteria in the query parameters.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "House"
+                ],
+                "summary": "Retrieve list of houses",
+                "responses": {
+                    "200": {
+                        "description": "List of houses",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/response.HouseResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request payload",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/get-users/{groupID}": {
             "get": {
                 "description": "Get a list of users belonging to the specified group using the provided groupID.",
@@ -121,8 +200,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Users",
-                    "Groups"
+                    "Users"
                 ],
                 "summary": "Retrieve users for a group",
                 "parameters": [
@@ -262,8 +340,45 @@ const docTemplate = `{
                 "message": {
                     "type": "string"
                 },
-                "statusCode": {
+                "status_code": {
                     "type": "integer"
+                }
+            }
+        },
+        "response.HouseResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "vote_group_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.VoteGroupResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "houses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/response.HouseResponse"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         }

@@ -1,0 +1,58 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  font-size: 5rem;
+  background: rgba(255, 255, 255, 0.2); /* fondo semitransparente */
+  backdrop-filter: blur(10px); /* efecto difuminado */
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  padding: 0.55em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Nueva regla para estilizar el input */
+.form input {
+  font-size: 1.5rem;
+  padding: 0.3em 0.5em;
+  width: 100%; /* ancho completo */
+  margin-top: 0.5em;
+  border-radius: 8px; /* esquinas redondeadas */
+}
+
+/* Nueva regla para el botón Crear */
+.form button {
+  display: block;
+  margin: 1em auto 0 auto; /* centrado */
+  font-size: 2rem; /* tamaño mayor */
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #0056b3;
+}
+
+/* Nueva regla para centrar el título del label */
+.form label {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.5em;
+}

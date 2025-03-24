@@ -1,5 +1,7 @@
 package dtos
 
+import "time"
+
 type UserDTO struct {
 	ID          uint
 	Name        string
@@ -14,12 +16,14 @@ type HouseDTO struct {
 	ID          uint
 	Name        string
 	VoteGroupID uint
+	CreatedAt   time.Time
 }
 
 type VoteGroupDTO struct {
-	ID     uint
-	Name   string
-	Houses []HouseDTO
+	ID        uint
+	Name      string
+	CreatedAt time.Time
+	// Houses    []HouseDTO
 }
 
 type VotingDTO struct {
